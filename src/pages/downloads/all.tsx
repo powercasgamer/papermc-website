@@ -38,7 +38,8 @@ const LegacyDownloads: NextPage<LegacyDownloadProps> = ({
   const latestVersion = versions?.versions[versions?.versions.length - 1];
   const legacy = selectedVersion !== latestVersion;
   const experimental =
-    builds?.builds[builds?.builds.length - 1].channel === "experimental" || selectedProject === "waterfall";
+    builds?.builds[builds?.builds.length - 1].channel === "experimental" ||
+    selectedProject === "waterfall";
 
   return (
     <>
@@ -60,18 +61,18 @@ const LegacyDownloads: NextPage<LegacyDownloadProps> = ({
           />
           <div className="flex-1 overflow-auto">
             {legacy && (
-                <>
-                  <div className="text-center px-4 py-2 font-bold bg-red-400 dark:bg-red-500 shadow-md">
-                    Legacy builds are not supported. Proceed at your own risk!
-                  </div>
-                </>
+              <>
+                <div className="text-center px-4 py-2 font-bold bg-red-400 dark:bg-red-500 shadow-md">
+                  Legacy builds are not supported. Proceed at your own risk!
+                </div>
+              </>
             )}
             {experimental && (
-                <>
-                  <div className="text-center px-4 py-2 font-bold bg-orange-400 dark:bg-orange-500 shadow-md">
-                    Experimental builds something. Proceed at your own risk!
-                  </div>
-                </>
+              <>
+                <div className="text-center px-4 py-2 font-bold bg-orange-400 dark:bg-orange-500 shadow-md">
+                  Experimental builds something. Proceed at your own risk!
+                </div>
+              </>
             )}
             {eol && (
               <div className="text-center px-4 py-2 font-bold bg-yellow-400 dark:bg-yellow-500 shadow-md">
