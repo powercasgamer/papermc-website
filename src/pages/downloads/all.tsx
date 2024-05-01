@@ -5,7 +5,7 @@ import SoftwareBuildsTable from "@/components/data/SoftwareBuildsTable";
 import DownloadsTree from "@/components/layout/DownloadsTree";
 import SEO from "@/components/util/SEO";
 import type { Project } from "@/lib/service/types";
-import { useVersionBuilds, getProject } from "@/lib/service/v2";
+import {useVersionBuilds, getProject, useProject} from "@/lib/service/v2";
 
 const INITIAL_PROJECT = "paper";
 
@@ -32,8 +32,11 @@ const LegacyDownloads: NextPage<LegacyDownloadProps> = ({
   const [selectedProject, setSelectedProject] = useState(initialProjectId);
   const [selectedVersion, setSelectedVersion] = useState(initialProjectVersion);
   const { data: builds } = useVersionBuilds(selectedProject, selectedVersion);
+  const { data: versions } = useProject(selectedProject);
 
   const eol = selectedProject === "waterfall";
+  const latestVersion = versions?.versions[versions?.versions.length - 1];
+  const legacy = selectedVersion !== latestVersion;
 
   return (
     <>
@@ -43,30 +46,35 @@ const LegacyDownloads: NextPage<LegacyDownloadProps> = ({
         keywords={[]}
       />
       <div className="flex flex-col h-screen">
-        <div className="h-16" />
-        <div className="text-center px-4 py-2 font-bold bg-red-400 dark:bg-red-500 shadow-md">
-          Legacy builds are not supported. Proceed at your own risk!
-        </div>
+        <div className="h-16"/>
+
+        {legacy && (
+            <>
+              <div className="text-center px-4 py-2 font-bold bg-red-400 dark:bg-red-500 shadow-md">
+                Legacy builds are not supported. Proceed at your own risk!
+              </div>
+            </>
+        )}
         <div className="flex-1 flex flex-row min-h-0">
           <DownloadsTree
-            selectedProject={selectedProject}
-            selectedVersion={selectedVersion}
-            onSelect={(project, version) => {
-              setSelectedProject(project);
-              setSelectedVersion(version);
-            }}
+              selectedProject={selectedProject}
+              selectedVersion={selectedVersion}
+              onSelect={(project, version) => {
+                setSelectedProject(project);
+                setSelectedVersion(version);
+              }}
           />
           <div className="flex-1 overflow-auto">
             {eol && (
-              <div className="text-center px-4 py-2 font-bold bg-yellow-400 dark:bg-yellow-500 shadow-md">
-                EOL builds are not supported. Proceed at your own risk!
-              </div>
+                <div className="text-center px-4 py-2 font-bold bg-yellow-400 dark:bg-yellow-500 shadow-md">
+                  EOL builds are not supported. Proceed at your own risk!
+                </div>
             )}
             <SoftwareBuildsTable
-              project={selectedProject}
-              version={selectedVersion}
-              builds={builds?.builds ?? []}
-              eol={eol}
+                project={selectedProject}
+                version={selectedVersion}
+                builds={builds?.builds ?? []}
+                eol={eol}
             />
           </div>
         </div>
