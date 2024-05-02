@@ -45,7 +45,7 @@ const LegacyDownloads: NextPage<LegacyDownloadProps> = ({
     <>
       <SEO
         title="Build explorer"
-        description="Build explorer for PaperMC projects."
+        description="Build explorer for PaperMC projects. Proceed with caution!"
         keywords={[]}
       />
       <div className="flex flex-col h-screen">
