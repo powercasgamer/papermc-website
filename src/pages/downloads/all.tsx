@@ -45,7 +45,7 @@ const LegacyDownloads: NextPage<LegacyDownloadProps> = ({
     <>
       <SEO
         title="Build explorer"
-        description="Build explorer for PaperMC projects. Proceed with caution!"
+        description="Build explorer for PaperMC projects."
         keywords={[]}
       />
       <div className="flex flex-col h-screen">
@@ -70,7 +70,8 @@ const LegacyDownloads: NextPage<LegacyDownloadProps> = ({
             {experimental && (
               <>
                 <div className="text-center px-4 py-2 font-bold bg-orange-400 dark:bg-orange-500 shadow-md">
-                  Experimental builds something. Proceed at your own risk!
+                  Experimental builds are not ready for production servers.
+                  Proceed at your own risk!
                 </div>
               </>
             )}
