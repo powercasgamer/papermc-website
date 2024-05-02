@@ -27,6 +27,7 @@ export function Terminal({ project }: ProjectProps) {
   useEffect(() => {
     const outputLines = [
       `Starting minecraft server version ${project.latestStableVersion}`,
+      `This server is running ${project.name} version git-${project.name} (MC: ${project.latestStableVersion}) (Implementing API version ${project.latestStableVersion}-R0.1-SNAPSHOT)`,
       'Preparing level "world"',
       "Preparing start region for dimension minecraft:overworld",
       "Time elapsed: 363 ms",
@@ -73,13 +74,13 @@ export function Terminal({ project }: ProjectProps) {
           <span className="text-green-400">
             Done (2.274s)! For help, type &quot;help&quot;
           </span>
-        </InfoLog>,
+        </InfoLog>
       );
     })();
   }, [project.latestStableVersion]);
 
   return (
-    <div className="max-h-82 w-120 h-283 rounded-lg bg-gray-800">
+    <div className="max-h-82 w-150 h-283 rounded-lg bg-gray-800">
       <div className="w-full bg-gray-900 rounded-t-lg flex p-2 gap-2">
         <div className="w-2.5 h-2.5 bg-red-500 rounded-full" />
         <div className="w-2.5 h-2.5 bg-yellow-500 rounded-full" />
