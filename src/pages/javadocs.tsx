@@ -66,6 +66,7 @@ const Javadocs: NextPage<JavadocProps> = ({
             name="Waterfall"
             icon={WaterfallIcon}
             javadocs={waterfallVersion}
+            eol
           />
         </div>
       </header>
